@@ -15,7 +15,7 @@ public class TaskController {
     private final TaskService taskService;
 
     @PostMapping("/tasks")
-    public ResponseEntity<?> tasks(@RequestBody Task task){
+    public ResponseEntity<?> createTask(@RequestBody Task task){
         try {
             return ResponseEntity.ok(taskService.create(task));
         } catch (IllegalArgumentException e) {

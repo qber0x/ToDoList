@@ -15,7 +15,7 @@ import java.util.UUID;
 public class TaskService {
     private final TaskRepository taskRepository;
 
-    public UUID create(Task task) {
+    public Task create(Task task) {
         if (task.getName() == null || task.getName().isEmpty()) {
             throw new IllegalArgumentException("task name can not be empty");
         }

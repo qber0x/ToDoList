@@ -12,11 +12,12 @@ public class TaskRepositoryImpl implements TaskRepository {
     private Map<UUID, Task> repository = new HashMap<>();
 
     @Override
-    public UUID create(Task task) {
+    public Task create(Task task) {
         UUID newGeneratedUuid = UUID.randomUUID();
         task.setId(newGeneratedUuid);
+        task.setStatus(false);
         repository.put(newGeneratedUuid, task);
-        return newGeneratedUuid;
+        return task;
     }
 
     @Override
