@@ -15,7 +15,7 @@ public class TaskRepositoryImpl implements TaskRepository {
     public Task create(Task task) {
         UUID newGeneratedUuid = UUID.randomUUID();
         task.setId(newGeneratedUuid);
-        task.setStatus(false);
+
         repository.put(newGeneratedUuid, task);
         return task;
     }

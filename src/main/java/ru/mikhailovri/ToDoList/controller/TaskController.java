@@ -19,14 +19,7 @@ public class TaskController {
 
     @PostMapping("/tasks")
     public ResponseEntity<?> createTask(@RequestBody Task task) {
-        try {
-            return ResponseEntity.ok(taskService.create(task));
-        } catch (IllegalArgumentException e) {
-            log.error("Ошибка при создании задачи: {}", e.getMessage());
-            return ResponseEntity.badRequest().body(Error.builder()
-                    .message(e.getMessage())
-                    .build());
-        }
+        return ResponseEntity.ok(taskService.create(task));
     }
 
     @GetMapping("/tasks")
@@ -36,23 +29,17 @@ public class TaskController {
 
     @GetMapping("/tasks/{id}")
     public ResponseEntity<?> getTaskByID(@PathVariable("id") UUID taskUuid) {
-        try {
-            return ResponseEntity.ok(taskService.getByUuid(taskUuid));
-        } catch (IllegalArgumentException e) {
-            log.error("Ошибка при поиске задачи: {}", e.getMessage());
-            return ResponseEntity.badRequest().body(Error.builder()
-                    .message(e.getMessage()).build());
-        }
+        return ResponseEntity.ok(taskService.getByUuid(taskUuid));
     }
 
     @PutMapping("/tasks/{id}")
-    public void updateTask (@PathVariable("id") UUID taskUuid,
-                                        @RequestBody Task newTask) {
+    public void updateTask(@PathVariable("id") UUID taskUuid,
+                           @RequestBody Task newTask) {
         taskService.update(taskUuid, newTask);
     }
 
     @DeleteMapping("/tasks/{id}")
-    public void deleteTask (@PathVariable("id") UUID uuid) {
+    public void deleteTask(@PathVariable("id") UUID uuid) {
         taskService.delete(uuid);
     }
 }

@@ -1,12 +1,10 @@
 package ru.mikhailovri.ToDoList.service;
 
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.mikhailovri.ToDoList.entity.Task;
 import ru.mikhailovri.ToDoList.repository.TaskRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,25 +17,22 @@ public class TaskService {
         if (task.getName() == null || task.getName().isEmpty()) {
             throw new IllegalArgumentException("task name can not be empty");
         }
-
+        task.setStatus(false);
         return taskRepository.create(task);
     }
 
-    public void delete(UUID uuid){
+    public void delete(UUID uuid) {
         isTaskExists(uuid);
-       taskRepository.delete(uuid);
+        taskRepository.delete(uuid);
     }
 
-    public void update(UUID uuid, Task updatedTask){
+    public void update(UUID uuid, Task updatedTask) {
         isTaskExists(uuid);
-
         taskRepository.update(uuid, updatedTask);
     }
 
     public Task getByUuid(UUID uuid) {
         isTaskExists(uuid);
-
-
         return taskRepository.getByUuid(uuid);
     }
 
